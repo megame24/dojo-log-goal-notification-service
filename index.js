@@ -8,7 +8,7 @@ const { invokeLambda } = require('./services/lambdaFunctionsService');
 const ssmClient = new SSMClient({ region: process.env.AWS_REGION });
 
 const parameterEnvNameMap = {
-  '/stage/HMAC_SECRETE': 'HMAC_SECRETE'
+[process.env.HMAC_SECRETE_NAME]: 'HMAC_SECRETE'
 };
 
 const getAndSetSecretes = async () => {
