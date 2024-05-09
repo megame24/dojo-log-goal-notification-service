@@ -1,0 +1,27 @@
+{
+  "name": "dojo-log-goal-notification-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/megame24/dojo-log-goal-notification-service.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/megame24/dojo-log-goal-notification-service/issues"
+  },
+  "homepage": "https://github.com/megame24/dojo-log-goal-notification-service#readme",
+  "dependencies": {
+    "@aws-sdk/client-lambda": "^3.554.0",
+    "@aws-sdk/client-ssm": "^3.569.0",
+    "axios": "^1.6.8",
+    "dayjs": "^1.11.10",
+    "dotenv": "^16.4.5"
+  }
+}

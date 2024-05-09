@@ -1,0 +1,1 @@
+zip -r ../dojologs-goal-notification-service.zip . -x $(cat .npmignore | sed 's/#.*//' | tr '\n' ' ')
