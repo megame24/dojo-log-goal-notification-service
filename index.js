@@ -40,6 +40,9 @@ const getNewNotificationDate = (notification) => {
 
 
 exports.handler = async (event) => {
+  const { apiBaseUrl, sesSenderName, sesSenderEmail } = event;
+
+  process.env.API_BASE_URL = apiBaseUrl;
   try {
 
     await getAndSetSecretes();
@@ -73,7 +76,13 @@ exports.handler = async (event) => {
     });
 
     const sendInAppNotificationsPromise = invokeLambda(process.env.SEND_EXPO_NOTIFICATION_LAMBDA_NAME, inAppNotifications);
-    const sendEmailNotificationsPromise = invokeLambda(process.env.SEND_EMAIL_LAMBDA_NAME, { sender: process.env.AWS_SES_SENDER, content: emailNotifications });
+    const sendEmailNotificationsPromise = invokeLambda(
+      process.env.SEND_EMAIL_LAMBDA_NAME,
+      {
+        sender: `${sesSenderName} ${sesSenderEmail}`,
+        content: emailNotifications
+      }
+    );
 
     await Promise.allSettled([sendInAppNotificationsPromise, sendEmailNotificationsPromise]);
 
