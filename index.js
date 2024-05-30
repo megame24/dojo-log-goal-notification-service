@@ -73,7 +73,7 @@ exports.handler = async (event) => {
     });
 
     const sendInAppNotificationsPromise = invokeLambda(process.env.SEND_EXPO_NOTIFICATION_LAMBDA_NAME, inAppNotifications);
-    const sendEmailNotificationsPromise = invokeLambda(process.env.SEND_EMAIL_LAMBDA_NAME, emailNotifications);
+    const sendEmailNotificationsPromise = invokeLambda(process.env.SEND_EMAIL_LAMBDA_NAME, { sender: process.env.AWS_SES_SENDER, content: emailNotifications });
 
     await Promise.allSettled([sendInAppNotificationsPromise, sendEmailNotificationsPromise]);
 
