@@ -26,12 +26,12 @@ const getAndSetSecretes = async () => {
 }
 
 const getNewNotificationDate = (notification) => {
-  const { dueDate } = notification;
+  const { finalNotificationDate } = notification;
   const today = getEndOfDay(new Date());
   let notificationDate = addTimeToDate(today, 7, "d");
 
-  if (new Date(notificationDate) > new Date(dueDate)) {
-    notificationDate = dueDate;
+  if (new Date(notificationDate) > new Date(finalNotificationDate)) {
+    notificationDate = finalNotificationDate;
   }
 
   return notificationDate;
@@ -59,7 +59,8 @@ exports.handler = async (event) => {
       let dueDateReached = true;
       let dbOperationBuffer = notificationsToDelete;
 
-      if (!areDatesEqual(new Date(notification.notificationDate), new Date(notification.dueDate))) {
+      if (!areDatesEqual(new Date(notification.notificationDate), new Date(notification.finalNotificationDate))) {
+        console.log('Goal notification was not deleted!')
         dueDateReached = false;
         dbOperationBuffer = notificationsToUpdate;
         const newNotificationDate = getNewNotificationDate(notification);
